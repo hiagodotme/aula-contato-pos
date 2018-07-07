@@ -12,7 +12,7 @@ namespace ContatoWeb.Controllers
     {
         private SqlConnection getConn()
         {
-            return new SqlConnection("Server=tcp:hiago-pos.database.windows.net,1433;Initial Catalog=bdcontato;Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            return new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["connectionStringAzure"].ConnectionString);
         }
         public string Get()
         {
@@ -27,9 +27,11 @@ namespace ContatoWeb.Controllers
 
             SqlDataReader oi = cmd.ExecuteReader();
 
+            string retorno = oi.GetString(0);
+
             con.Close();
 
-            return oi.GetString(0);
+            return retorno;
         }
     }
 
