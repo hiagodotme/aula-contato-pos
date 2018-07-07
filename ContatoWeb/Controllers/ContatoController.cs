@@ -12,7 +12,7 @@ namespace ContatoWeb.Controllers
     {
         private SqlConnection getConn()
         {
-            return new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["connectionStringAzure"]);
+            return new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["connectionStringAzure"].ConnectionString);
         }
         public string Get()
         {
