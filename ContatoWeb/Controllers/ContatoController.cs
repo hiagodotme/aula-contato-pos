@@ -18,7 +18,7 @@ namespace ContatoWeb.Controllers
                 .ConnectionString;
             return new SqlConnection(strcon);
         }
-        public string Get()
+        public List<Contato> Get()
         {
             SqlConnection con = getConn();
 
@@ -27,11 +27,18 @@ namespace ContatoWeb.Controllers
             SqlCommand cmd = new SqlCommand();
 
             cmd.Connection = con;
-            cmd.CommandText = @"SELECT * FROM contato FOR JSON auto";
+            cmd.CommandText = "SELECT * FROM contato";
 
             SqlDataReader oi = cmd.ExecuteReader();
-            oi.Read();
-            string retorno = oi.GetString(0);
+            List<Contato> retorno = new List<Contato>();
+            while(oi.Read())
+            {
+                retorno.Add(new Contato {
+                    ContatoId = (int)oi["ContatoId"],
+                    Nome = (String)oi["Nome"],
+                    Email = (String)oi["Email"]
+                });
+            }
 
             con.Close();
 
