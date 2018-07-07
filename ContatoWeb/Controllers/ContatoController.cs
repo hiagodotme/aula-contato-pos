@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Configuration;
 
 namespace ContatoWeb.Controllers
 {
@@ -12,7 +13,10 @@ namespace ContatoWeb.Controllers
     {
         private SqlConnection getConn()
         {
-            return new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["connectionStringAzure"].ConnectionString);
+            var key = "connectionStringAzure";
+            string strcon = ConfigurationManager.ConnectionStrings[key]
+                .ConnectionString;
+            return new SqlConnection(strcon);
         }
         public string Get()
         {
