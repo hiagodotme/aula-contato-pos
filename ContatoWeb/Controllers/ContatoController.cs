@@ -44,6 +44,24 @@ namespace ContatoWeb.Controllers
 
             return retorno;
         }
+
+        [HttpPost]
+        public bool inserir (Contato c)
+        {
+            SqlConnection con = getConn();
+
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = con;
+            cmd.CommandText = "INSERT INTO contato (@Nome, @Email)";
+            cmd.Parameters.AddWithValue("Nome", c.Nome);
+            cmd.Parameters.AddWithValue("Email", c.Email);
+            cmd.ExecuteScalar();
+
+            return true;
+        }  
     }
 
     public class Contato
