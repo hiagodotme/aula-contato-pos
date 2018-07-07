@@ -11,7 +11,7 @@ namespace ContatoWeb.Controllers
     {
         public string Get()
         {
-            return "Olá Mundo";
+            return "Olá Mundo, integração contínua tá ok ;)";
         }
     }
 }
