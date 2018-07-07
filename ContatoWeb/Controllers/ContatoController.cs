@@ -30,7 +30,7 @@ namespace ContatoWeb.Controllers
             cmd.CommandText = @"SELECT * FROM contato FOR JSON auto";
 
             SqlDataReader oi = cmd.ExecuteReader();
-
+            oi.Read();
             string retorno = oi.GetString(0);
 
             con.Close();
